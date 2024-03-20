@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="bootstrap-5.2.3-dist/bootstrap-5.2.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="calculatorBackground mt-5">
+            <div class="display">
+                <div class="row pt-2">
+                    <!-- Result display -->
+                    <div class="row">
+                        <div class="col-md-12 text-center align-bottom">
+                            <div id="resultDisplay" class="text-center"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="row pt-2">
+                        <div class="col-md-12 text-center">
+                            <p id="calcDisplay"></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row ">
+                <div class="col-md-3 text-center">
+                    <button class="btn btn-dark calcButton topButton leftButton" id="buttonSeven">7</button>
+                </div>
+                <div class="col-md-3 text-center">
+                    <button class="btn btn-dark calcButton topButton" id="buttonEight">8</button>
+                </div>
+                <div class="col-md-3 text-center" >
+                    <button class="btn btn-dark calcButton topButton" id="buttonNine">9</button>
+                </div>
+                <div class="col-md-3 text-center" >
+                    <button class="btn btn-dark calcButton topButton RightButton" id="buttonAdd">+</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    <button class="btn btn-dark calcButton leftButton" id="buttonFour">4</button>
+                </div>
+                <div class="col-md-3 text-center" >
+                    <button class="btn btn-dark calcButton" id="buttonFive">5</button>
+                </div>
+                <div class="col-md-3 text-center">
+                    <button class="btn btn-dark calcButton" id="buttonSix">6</button>
+                </div>
+                <div class="col-md-3 text-center" >
+                    <button class="btn btn-dark calcButton RightButton" id="buttonSub">-</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    <button class="btn btn-dark calcButton leftButton" id="buttonOne">1</button>
+                </div>
+                <div class="col-md-3 text-center">
+                    <button class="btn btn-dark calcButton" id="buttonTwo">2</button>
+                </div>
+                <div class="col-md-3 text-center">
+                    <button class="btn btn-dark calcButton" id="buttonThree">3</button>
+                </div>
+                <div class="col-md-3 text-center" >
+                    <button class="btn btn-dark calcButton RightButton" id="buttonMultiply">*</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    <button class="btn btn-dark calcButton leftButton" id="buttonClear">C</button>
+                </div>
+                <div class="col-md-3 text-center">
+                    <button class="btn btn-dark calcButton" id="buttonZero">0</button>
+                </div>
+                <div class="col-md-3 text-center">
+                    <button class="btn btn-dark calcButton" id="buttonDot">.</button>
+                </div>
+                <div class="col-md-3 text-center">
+                    <button class="btn btn-dark calcButton RightButton" id="buttonDivide">/</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 text-center">
+                </div>
+                <div class="col-md-3 text-center">
+                </div>
+                <div class="col-md-3 text-center">
+                </div>
+                <div class="col-md-3 text-center">
+                    <button class="btn btn-dark calcButton RightButton" id="buttonEqual">=</button>
+                </div>
+            </div>
+        </div>
+
+
+        
+
+    </div>
+
+
+
+    <script src="script.js">
+
+    </script>
+</body>
+</html>
