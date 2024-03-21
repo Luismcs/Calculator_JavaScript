@@ -1,10 +1,15 @@
+//Elements Definition
+
+//Operation, Result , FirstInput
 let operation = "";
 let result = 0;
 let first = true;
 
+//Calculator Displays
 let calcDisplay = document.getElementById('calcDisplay');
 let resultDisplay = document.getElementById('resultDisplay');
 
+//Button Elements
 let buttonOne = document.getElementById('buttonOne');
 let buttonTwo = document.getElementById('buttonTwo');
 let buttonThree = document.getElementById('buttonThree');
@@ -24,7 +29,9 @@ let buttonDivide = document.getElementById('buttonDivide');
 let buttonMultiply = document.getElementById('buttonMultiply');
 
 //Clears the calculator
-buttonClear.addEventListener('click', function() {
+
+//Clear Button Event
+buttonClear.addEventListener('click', function() { //Clears the screen and resets the result
     result = 0;
     first=true;
     operation = "";
@@ -38,6 +45,10 @@ buttonClear.addEventListener('click', function() {
 
 buttonDot.addEventListener('click', function() { //adds a dot
 
+    if(verifiesMultipleDots()){
+        return;
+    }
+
     if(verifiesDot()){ //if the screen has just a "." then nothing happens
         return;
     }
@@ -49,6 +60,7 @@ buttonOne.addEventListener('click', function() { //adds a 1
     addOperator();
 
     verifiesClear();
+
     calcDisplay.innerHTML += "1";
 });
 
@@ -129,41 +141,42 @@ buttonEqual.addEventListener('click', function() {
 
     resultDisplay.innerHTML="";
 
+    //Verifies if the input is a number
     if(verifiesNan()){
         calcDisplay.innerHTML = "Error";
         return;
     }
 
+    //Handles if the last input was an operator
     if(verifiesInputOperation()){
         calcDisplay.innerHTML = result;
         return;
     }
 
 
-    //Depending on the last operation saved executes the corresponding operations
-    if(operation == "+"){
+    //Depending on the last operation executes the calculus
+    if(operation == "+"){   //Addition
 
         result = result + parseFloat (calcDisplay.innerHTML);
         calcDisplay.innerHTML = result;
 
     }
-    else if(operation == "-"){
+    else if(operation == "-"){ //Subtraction
 
         result = result - parseFloat (calcDisplay.innerHTML);
         calcDisplay.innerHTML = result;
 
     }
-    else if(operation == "/"){
+    else if(operation == "/"){  //Division
 
         result = result / parseFloat (calcDisplay.innerHTML);
         calcDisplay.innerHTML = result;
 
     }
-    else if(operation == "*"){
+    else if(operation == "*"){  //Multiply
 
         result = result * parseFloat (calcDisplay.innerHTML);
         calcDisplay.innerHTML = result;
-
     }
 
 });
@@ -192,7 +205,8 @@ function verifiesClear(){   //If the last input was an operation then clears the
 
 }
 
-function verifiesNan(){
+function verifiesNan(){  //verifies if the result is a number
+
     if(isNaN(result)){
         return true;
     }
@@ -252,8 +266,6 @@ buttonAdd.addEventListener('click', function() {
     else{
         result=lastOperation(resultDisplay,calcDisplay);
     }
-
-
 
     calcDisplay.innerHTML = '+';
     resultDisplay.innerHTML = result;
@@ -319,21 +331,35 @@ buttonDivide.addEventListener('click', function() {
 
 });
 
-function lastOperation(resultDisplay, calcDisplay) {
+function lastOperation(resultDisplay, calcDisplay) {    //Alows the user to make operations consecutively
     // Assuming resultDisplay and calcDisplay are HTML elements
-    if (resultDisplay.innerHTML.charAt(resultDisplay.innerHTML.length - 1) == "+") {
+    if (resultDisplay.innerHTML.charAt(resultDisplay.innerHTML.length - 1) == "+") {    //Addition
         result = parseFloat(result) + parseFloat(calcDisplay.innerHTML);
     }
-    else if (resultDisplay.innerHTML.charAt(resultDisplay.innerHTML.length - 1) == "-") {
+    else if (resultDisplay.innerHTML.charAt(resultDisplay.innerHTML.length - 1) == "-") {   //Subtraction
         result = parseFloat(result) - parseFloat(calcDisplay.innerHTML);
     }
-    else if (resultDisplay.innerHTML.charAt(resultDisplay.innerHTML.length - 1) == "*") {
+    else if (resultDisplay.innerHTML.charAt(resultDisplay.innerHTML.length - 1) == "*") {   //Multiply
         result = parseFloat(result) * parseFloat(calcDisplay.innerHTML);
     }
-    else if (resultDisplay.innerHTML.charAt(resultDisplay.innerHTML.length - 1) == "/") {
+    else if (resultDisplay.innerHTML.charAt(resultDisplay.innerHTML.length - 1) == "/") {   //Division
         result = parseFloat(result) / parseFloat(calcDisplay.innerHTML);
     }
     return result; // Returning the calculated result
 }
+
+function verifiesMultipleDots(){
+
+    if(calcDisplay.innerHTML.charAt(calcDisplay.innerHTML.length-1) == "."){
+        return true;
+    }
+
+    return false;
+
+}
+
+
+
+
 
 
