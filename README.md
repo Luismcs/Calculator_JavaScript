@@ -9,12 +9,6 @@ This project is a simple calculator implemented in JavaScript, designed to perfo
 - Multiplication
 - Division
 
-## Usage
-
-1. Open the `index.html` file in a web browser.
-2. Input numbers and operations using the provided buttons.
-3. Click the "=" button to see the result of the calculation.
-
 ## Technologies Used
 
 - HTML
