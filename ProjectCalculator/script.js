@@ -32,12 +32,12 @@ let buttonMultiply = document.getElementById('buttonMultiply');
 
 //Clear Button Event
 buttonClear.addEventListener('click', function() { //Clears the screen and resets the result
+
     result = 0;
     first=true;
     operation = "";
     calcDisplay.innerHTML = "";
     resultDisplay.innerHTML = "";
-
 
 });
 
@@ -56,84 +56,61 @@ buttonDot.addEventListener('click', function() { //adds a dot
     calcDisplay.innerHTML += ".";
 });
 
-buttonOne.addEventListener('click', function() { //adds a 1
+function addDigit(number){  //display number clicked
     addOperator();
 
     verifiesClear();
 
-    calcDisplay.innerHTML += "1";
+    calcDisplay.innerHTML += number;
+}
+
+buttonOne.addEventListener('click', function() { //adds a 1
+    addDigit("1");
 });
 
 buttonTwo.addEventListener('click', function() { //adds a 2
-    addOperator();
+    addDigit("2");
 
-    verifiesClear();
-
-    calcDisplay.innerHTML += "2";
 });
 
 buttonThree.addEventListener('click', function() { //adds a 3
-    addOperator();
+    addDigit("3");
 
-    verifiesClear();
-
-    calcDisplay.innerHTML += "3";
 });
 
 buttonFour.addEventListener('click', function() { //adds a 4
-    addOperator();
+    addDigit("4");
 
-    verifiesClear();
-
-    calcDisplay.innerHTML += "4";
 });
 
 buttonFive.addEventListener('click', function() { //adds a 5
-    addOperator();
+    addDigit("5");
 
-    verifiesClear();
-
-    calcDisplay.innerHTML += "5";
 });
 
 buttonSix.addEventListener('click', function() { //adds a 6
-    addOperator();
+    addDigit("6");
 
-    verifiesClear();
-
-    calcDisplay.innerHTML += "6";
 });
 
 buttonSeven.addEventListener('click', function() { //adds a 7
-    addOperator();
+    addDigit("7");
 
-    verifiesClear();
-
-    calcDisplay.innerHTML += "7";
 });
 
 buttonEight.addEventListener('click', function() { //adds a 8
-    addOperator();
+    addDigit("8");
 
-    verifiesClear();
-
-    calcDisplay.innerHTML += "8";
 });
 
 buttonNine.addEventListener('click', function() { //adds a 9
-    addOperator();
+    addDigit("9");
 
-    verifiesClear();
-
-    calcDisplay.innerHTML += "9";
 });
 
 buttonZero.addEventListener('click', function() { //adds a 0
-    addOperator();
+    addDigit("0");
 
-    verifiesClear();
-
-    calcDisplay.innerHTML += "0";
 });
 
 //Equal Button
@@ -207,6 +184,14 @@ function verifiesClear(){   //If the last input was an operation then clears the
 
 function verifiesNan(){  //verifies if the result is a number
 
+    //Verifies if first input is an operator
+    if(first && calcDisplay.innerHTML == "+"
+    ||calcDisplay.innerHTML == "-"
+    ||calcDisplay.innerHTML == "/"
+    ||calcDisplay.innerHTML == "*"){
+        return true;
+    }
+
     if(isNaN(result)){
         return true;
     }
@@ -256,16 +241,11 @@ buttonAdd.addEventListener('click', function() {
     //Saves the operation clicked
     operation = "+";
 
-    //if it's the first input, adds the value inputted to the result
-    if(first){
-
-        result += parseFloat (calcDisplay.innerHTML);
-        first = false;
-
+    if(verifiesFirstInputOperator("+")){
+        return;
     }
-    else{
-        result=lastOperation(resultDisplay,calcDisplay);
-    }
+
+    verifiesFirst();
 
     calcDisplay.innerHTML = '+';
     resultDisplay.innerHTML = result;
@@ -278,15 +258,11 @@ buttonSub.addEventListener('click', function() {
     //Saves the operation clicked
     operation = "-";
 
-    //if it's the first input, adds the value inputted to the result
-    if(first){
+    if(verifiesFirstInputOperator("-")){
+        return;
+    }
 
-        result = result - parseFloat (calcDisplay.innerHTML);
-        first = false;
-    }
-    else{
-        result=lastOperation(resultDisplay,calcDisplay);
-    }
+    verifiesFirst();
 
     calcDisplay.innerHTML = '-';
     resultDisplay.innerHTML = result;
@@ -298,14 +274,11 @@ buttonMultiply.addEventListener('click', function() {
     //Saves the operation clicked
     operation = "*";
 
-    //if it's the first input, adds the value inputted to the result
-    if(first){
-        result = result + parseFloat (calcDisplay.innerHTML);
-        first = false;
+    if(verifiesFirstInputOperator("*")){
+        return;
     }
-    else{
-        result=lastOperation(resultDisplay,calcDisplay);
-    }
+
+    verifiesFirst();
 
     calcDisplay.innerHTML = '*';
     resultDisplay.innerHTML = result;
@@ -317,14 +290,11 @@ buttonDivide.addEventListener('click', function() {
     //Saves the operation clicked
     operation = "/";
 
-    //if it's the first input, adds the value inputted to the result
-    if(first){
-        result = result + parseFloat (calcDisplay.innerHTML);
-        first = false;
+    if(verifiesFirstInputOperator("/")){
+        return;
     }
-    else{
-        result=lastOperation(resultDisplay,calcDisplay);
-    }
+
+    verifiesFirst();
 
     calcDisplay.innerHTML = '/';
     resultDisplay.innerHTML = result;
@@ -332,30 +302,73 @@ buttonDivide.addEventListener('click', function() {
 });
 
 function lastOperation(resultDisplay, calcDisplay) {    //Alows the user to make operations consecutively
-    // Assuming resultDisplay and calcDisplay are HTML elements
-    if (resultDisplay.innerHTML.charAt(resultDisplay.innerHTML.length - 1) == "+") {    //Addition
-        result = parseFloat(result) + parseFloat(calcDisplay.innerHTML);
+    switch (resultDisplay.innerHTML.charAt(resultDisplay.innerHTML.length - 1)) {
+        case "+":
+            result = parseFloat(result) + parseFloat(calcDisplay.innerHTML);
+            break;
+        case "-":
+            result = parseFloat(result) - parseFloat(calcDisplay.innerHTML);
+            break;
+        case "*":
+            result = parseFloat(result) * parseFloat(calcDisplay.innerHTML);
+            break;
+        case "/":
+            result = parseFloat(result) / parseFloat(calcDisplay.innerHTML);
+            break;
+        default:
+            break;
     }
-    else if (resultDisplay.innerHTML.charAt(resultDisplay.innerHTML.length - 1) == "-") {   //Subtraction
-        result = parseFloat(result) - parseFloat(calcDisplay.innerHTML);
-    }
-    else if (resultDisplay.innerHTML.charAt(resultDisplay.innerHTML.length - 1) == "*") {   //Multiply
-        result = parseFloat(result) * parseFloat(calcDisplay.innerHTML);
-    }
-    else if (resultDisplay.innerHTML.charAt(resultDisplay.innerHTML.length - 1) == "/") {   //Division
-        result = parseFloat(result) / parseFloat(calcDisplay.innerHTML);
-    }
-    return result; // Returning the calculated result
+    return result; // Returns the calculated result
 }
 
 function verifiesMultipleDots(){
 
-    if(calcDisplay.innerHTML.charAt(calcDisplay.innerHTML.length-1) == "."){
+    let status = (calcDisplay.innerHTML.charAt(calcDisplay.innerHTML.length-1)) ? true : false;
+
+    return status;
+
+}
+
+//Verifies if it's the first input
+function verifiesFirst(){
+    //if it's the first input, adds the value inputted to the result
+    if(first){
+
+        result = result + parseFloat (calcDisplay.innerHTML);
+        first = false;
+    }
+    else
+        result=lastOperation(resultDisplay,calcDisplay);
+}
+
+function verifiesFirstInputOperator(operator){
+    if(calcDisplay.innerHTML.trim() === ""){
+        resultDisplay.innerHTML="";
+        if(operator=="+"){
+            calcDisplay.innerHTML="+"
+        }
+        else if(operator=="-"){
+            calcDisplay.innerHTML="-"
+        }
+        else if(operator=="*"){
+            calcDisplay.innerHTML="*"
+        }
+        else if(operator=="/"){
+            calcDisplay.innerHTML="/"
+        }
         return true;
     }
-
     return false;
+}
 
+function changeLastOperator(operator){
+    if(calcDisplay.innerHTML.endsWith("+") ||
+        calcDisplay.innerHTML.endsWith("/") ||
+        calcDisplay.innerHTML.endsWith("*") ||
+        calcDisplay.innerHTML.endsWith("-")) {
+
+        calcDisplay.innerHTML = calcDisplay.innerHTML.substring(0, calcDisplay.innerHTML.length - 1) + operator;
+    }
 }
 
 
