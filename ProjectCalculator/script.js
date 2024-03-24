@@ -132,7 +132,7 @@ buttonEqual.addEventListener('click', function() {
 
 
     //Depending on the last operation executes the calculus
-    if(operation == "+"){   //Addition
+    if(operation === "+"){   //Addition
 
         result = result + parseFloat (calcDisplay.innerHTML);
         calcDisplay.innerHTML = result;
@@ -323,9 +323,11 @@ function lastOperation(resultDisplay, calcDisplay) {    //Alows the user to make
 
 function verifiesMultipleDots(){
 
-    let status = (calcDisplay.innerHTML.charAt(calcDisplay.innerHTML.length-1)) ? true : false;
+    if(calcDisplay.innerHTML.charAt(calcDisplay.innerHTML.length-1) == "."){
+        return true;
+    }
 
-    return status;
+    return false;
 
 }
 
@@ -361,15 +363,6 @@ function verifiesFirstInputOperator(operator){
     return false;
 }
 
-function changeLastOperator(operator){
-    if(calcDisplay.innerHTML.endsWith("+") ||
-        calcDisplay.innerHTML.endsWith("/") ||
-        calcDisplay.innerHTML.endsWith("*") ||
-        calcDisplay.innerHTML.endsWith("-")) {
-
-        calcDisplay.innerHTML = calcDisplay.innerHTML.substring(0, calcDisplay.innerHTML.length - 1) + operator;
-    }
-}
 
 
 
